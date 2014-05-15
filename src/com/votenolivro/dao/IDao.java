@@ -14,5 +14,6 @@ public interface IDao <T extends EntityTemplate>{
 
 	public void save(IEntity entity);
 	public List<T> list();
+	public T getById(Long id);
 	
 }

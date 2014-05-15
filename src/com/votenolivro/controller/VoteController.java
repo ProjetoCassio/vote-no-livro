@@ -2,52 +2,92 @@ package com.votenolivro.controller;
 
 import java.util.Date;
 import java.util.List;
-
 import com.votenolivro.bean.Book;
-import com.votenolivro.bean.UserExt;
+import com.votenolivro.bean.NewResearch;
 import com.votenolivro.bean.Vote;
 import com.votenolivro.dao.DaoFactory;
-
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 
 /**
  * 
  * @author Cassio Lemos
- *
+ * 
  */
 @Resource
-public class VoteController extends AbstractController{
+public class VoteController extends AbstractController {
 
-	
-	public VoteController(Result result, DaoFactory daoFactory){
+	private NewResearch newResearch;
+
+	public VoteController(Result result, DaoFactory daoFactory,
+			NewResearch newResearch) {
 		super(daoFactory, result);
+		this.newResearch = newResearch;
+	}
+
+	public void list() {
+		// listar os livros para votacao
+		log.info("Carregando listas inicias");
+		loadInitialList();
+
+		List<Book> combinations = new CombinationFactory().getValidCombination(
+				this.newResearch.getBooksToUser(), this.newResearch.getVotes());
+
+		// acabaram as opcoes, direcionar para parte final
+		if (combinations == null) {
+			// caso o usuario ainda esteja na sessao, direciona para o final
+			if (this.newResearch.getUserExt() != null) {
+				log.info("Usuario ok - Redirecionando para o ranking geral");
+				this.result.forwardTo(RankingController.class).list();
+				return;
+			} else {
+				log.info("Votacao ok - Redirecionando para formulario do usuario");
+				this.result.forwardTo(UserController.class).list();
+				return;
+			}
+
+		}
+		this.newResearch.setBooksInVote(combinations);
+		this.result.include("livros", combinations);
 	}
 	
-	public void list(){
-		//listar os livros para votacao
-		List<Book> livros = this.daoFactory.getDao(Book.class).list();
-		
-//		Book book1 = new Book("Cassio", "Livro 1", "Descrição do livro");
-//		Book book2 = new Book("Cassio", "Livro 2", "Descrição do livro 2");
-//		
-//		this.daoFactory.getDao(Book.class).save(book1);
-//		this.daoFactory.getDao(Book.class).save(book2);
-//
-//		UserExt user = new UserExt("Usuario", "cassiodsl@gmail.com");
-//		
-//		this.daoFactory.getDao(UserExt.class).save(user);
-//		
-//		Vote vote = new Vote(book1, user, new Date());
-//		this.daoFactory.getDao(Vote.class).save(vote);
-//		
-//		Vote vote2 = new Vote(book2, user, new Date());
-//		this.daoFactory.getDao(Vote.class).save(vote2);
-//		
-//		Vote vote3 = new Vote(book2, user, new Date());
-//		this.daoFactory.getDao(Vote.class).save(vote3);
-		
-		this.result.include("livros", livros);
+	private void loadInitialList(){
+		if (this.newResearch.getBooksToUser() == null) {
+			List<Book> livros = this.daoFactory.getDao(Book.class).list();
+			if (livros == null || livros.isEmpty()) {
+				LoadInitialData cInicial = new LoadInitialData();
+				cInicial.loadBooks(this.daoFactory);
+				log.error("Lista de livros nao cadastrada.");
+			
+			}
+			this.newResearch.setBooksToUser(livros);
+		}
 	}
-	
+
+	/*
+	 * Ao salvar o sistema deve persistir o voto verificar a proxima lista e
+	 * direcionar para o list se nao tiver mais escolhas, direcionar para uma
+	 * nova pagina para pedir o usuario e mostrar o ranking
+	 */
+	public void save(String id) {
+		log.info("Voto realizado, salvando.");
+		Book book = this.daoFactory.getDao(Book.class).getById(new Long(id));
+		Book otherBook = getOtherBook(this.newResearch.getBooksInVote(),
+				new Long(id));
+
+		Vote vote = new Vote(book, otherBook, null, new Date());
+		this.newResearch.addVote(vote);
+		this.result.forwardTo(VoteController.class).list();
+
+	}
+
+	private Book getOtherBook(List<Book> books, Long selected) {
+		for (Book book : books) {
+			if (!book.getId().equals(selected)) {
+				return book;
+			}
+		}
+		return null;
+	}
+
 }

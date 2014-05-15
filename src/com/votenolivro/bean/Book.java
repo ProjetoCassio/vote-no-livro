@@ -13,6 +13,7 @@ public class Book extends EntityTemplate {
 	private String author;
 	private String title;
 	private String description;
+	private String imageId;
 
 	public Book() {
 		super();
@@ -49,4 +50,23 @@ public class Book extends EntityTemplate {
 		this.description = description;
 	}
 
+	public String getImageId() {
+		return imageId;
+	}
+
+	public void setImageId(String imageId) {
+		this.imageId = imageId;
+	}
+
+
+@Override
+public boolean equals(Object o){
+	Book rec = (Book) o;
+	if(rec.id.equals(this.id)){
+		return true;
+	}
+	return false;
+}
+	
+	
 }

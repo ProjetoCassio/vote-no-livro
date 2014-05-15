@@ -1,8 +1,10 @@
 package com.votenolivro.dao;
 
 import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.Transaction;
+
 import com.votenolivro.bean.EntityTemplate;
 import com.votenolivro.bean.IEntity;
 
@@ -34,6 +36,11 @@ public class GenericDao<T extends EntityTemplate> implements IDao<T>{
 				this.clazz);
 		List<T> entities = criteria.list();
 		return entities;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public T getById(Long id){
+		return (T)this.daoFactory.getSession().load(clazz, id);
 	}
 
 }

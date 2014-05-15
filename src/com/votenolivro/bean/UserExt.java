@@ -39,4 +39,15 @@ public class UserExt extends EntityTemplate {
 		this.email = email;
 	}
 
+	public boolean isNotValid() {
+		
+		if(this.name==null || "".equals(this.name)){
+			return false;
+		}
+		if(this.email==null || "".equals(this.email)){
+			return false;
+		}
+		return true;
+	}
+
 }
