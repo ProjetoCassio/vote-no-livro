@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Wed May 14 14:32:24 BRT 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0145-fbca-d21e-000004039290 
+on database directory C:\Projetos\Bluesoft\vote-no-livro\votenolivro with class loader sun.misc.Launcher$AppClassLoader@779c86c5 
+Loaded from file:/C:/Projetos/Bluesoft/vote-no-livro/WebContent/WEB-INF/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_55-b13
+user.dir=C:\Projetos\Bluesoft\vote-no-livro
+os.name=Windows 8.1
+os.arch=amd64
+os.version=6.3
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
