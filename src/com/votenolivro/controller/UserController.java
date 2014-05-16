@@ -56,7 +56,7 @@ public class UserController extends AbstractController {
 		}
 
 		log.info("Redirecionando para o formulario de Ranking");
-		this.result.forwardTo(RankingController.class).list();
+		this.result.redirectTo(RankingController.class).list();
 	}
 
 }

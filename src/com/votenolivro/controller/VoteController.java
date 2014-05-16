@@ -38,11 +38,11 @@ public class VoteController extends AbstractController {
 			// caso o usuario ainda esteja na sessao, direciona para o final
 			if (this.newResearch.getUserExt() != null) {
 				log.info("Usuario ok - Redirecionando para o ranking geral");
-				this.result.forwardTo(RankingController.class).list();
+				this.result.redirectTo(RankingController.class).list();
 				return;
 			} else {
 				log.info("Votacao ok - Redirecionando para formulario do usuario");
-				this.result.forwardTo(UserController.class).list();
+				this.result.redirectTo(UserController.class).list();
 				return;
 			}
 
@@ -77,7 +77,7 @@ public class VoteController extends AbstractController {
 
 		Vote vote = new Vote(book, otherBook, null, new Date());
 		this.newResearch.addVote(vote);
-		this.result.forwardTo(VoteController.class).list();
+		this.result.redirectTo(VoteController.class).list();
 
 	}
 

@@ -33,12 +33,6 @@
 	</context-param>
 	
 	
-	<context-param>
-		<param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>
-		<param-value>pt_BR</param-value>
-	</context-param>
-	
-	
 	<filter>
 		<filter-name>vraptor</filter-name>
 		<filter-class>br.com.caelum.vraptor.VRaptor</filter-class>
@@ -64,5 +58,15 @@
 		
 	</jsp-config>
 	
+	<error-page>    
+        <error-code>404</error-code>    
+        <location>/errorPage.jsp</location>    
+     </error-page>   
+      
+      
+<error-page>    
+     <error-code>500</error-code>    
+     <location>/errorPage.jsp</location>    
+</error-page>    
 	
 </web-app>

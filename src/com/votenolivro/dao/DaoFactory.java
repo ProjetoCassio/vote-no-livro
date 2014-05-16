@@ -40,6 +40,6 @@ public class DaoFactory {
 	}
 
 	public <T extends EntityTemplate> IDao<T> getDao(Class<T> clazz) {
-		return new GenericDao<>(clazz, this);
+		return new GenericDao<T>(clazz, this);
 	}
 }

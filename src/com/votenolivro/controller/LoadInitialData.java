@@ -8,6 +8,11 @@ public class LoadInitialData {
 	public void loadBooks(DaoFactory daoFactory) {
 
 		// cadastrar 5 livros
+		/*
+		 * Dump inicial, apenas para apresentacao
+		 * O ideal seria criar uma janela de cadastros
+		 * nao necessario
+		 */
 		Book b1 = new Book("Paulo Silveira",
 				"Introdução à arquitetura e design de software", "Uma leitura tranquila, falando de metodos e melhores praticas da linguagem Java");
 		Book b2 = new Book("Bill Gates",

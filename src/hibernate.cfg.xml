@@ -7,7 +7,7 @@
   <session-factory>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
-    <property name="hibernate.connection.url">jdbc:derby:votenolivro;create=true</property>
+    <property name="hibernate.connection.url">jdbc:derby:${catalina.base}/logs/votenolivro;create=true</property>
     <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</property>
     <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
     <property name="hibernate.hbm2ddl.auto">update</property>

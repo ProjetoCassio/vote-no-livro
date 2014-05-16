@@ -10,7 +10,7 @@ public class TestDaoFactory extends TestCase{
 
 	public void testDaoFactory(){
 		
-		GenericDao<Book> daoLivro = new GenericDao<>(Book.class, new DaoFactory());
+		GenericDao<Book> daoLivro = new GenericDao<Book>(Book.class, new DaoFactory());
 		assertNotNull(daoLivro.list());
 		
 	}

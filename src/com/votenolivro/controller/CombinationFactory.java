@@ -21,7 +21,7 @@ public class CombinationFactory {
 	 * @return
 	 */
 	public List<Book> getValidCombination(List<Book> books, List<Vote> votes) {
-		List<Book> listBookFiltered = new ArrayList<>();
+		List<Book> listBookFiltered = new ArrayList<Book>();
 		
 		if (books == null) {
 			return null;
