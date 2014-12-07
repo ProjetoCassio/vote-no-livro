@@ -12,6 +12,7 @@
 <body>  
 
 <p>Ocorreu um erro, detalhes do erro:</p>
+<% if(exception!=null){%>
 <div>  
         <div><%= exception.toString() %><br>  </div>  
   
@@ -26,7 +27,7 @@
                     out.println("-->");  
                     %>  
 </div>  
-          
+        <% }%>  
 </body>  
 
 

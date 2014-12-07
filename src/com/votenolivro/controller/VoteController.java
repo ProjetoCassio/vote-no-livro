@@ -58,6 +58,7 @@ public class VoteController extends AbstractController {
 				LoadInitialData cInicial = new LoadInitialData();
 				cInicial.loadBooks(this.daoFactory);
 				log.error("Lista de livros nao cadastrada.");
+				livros = this.daoFactory.getDao(Book.class).list();
 			
 			}
 			this.newResearch.setBooksToUser(livros);

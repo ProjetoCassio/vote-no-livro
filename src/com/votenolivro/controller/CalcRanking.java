@@ -21,15 +21,16 @@ public class CalcRanking {
 		HashMap<Book, Integer> ranking = new HashMap<Book, Integer>();
 		List<BookRk> listPont = new ArrayList<BookRk>();
 		
-		for (Vote vote : votes) {
-			if(ranking.containsKey(vote.getBook())){
-				int pont = ranking.get(vote.getBook());
-				ranking.put(vote.getBook(), pont+1);
-			}else{
-				ranking.put(vote.getBook(), 1);
+		if (votes!=null) {
+			for (Vote vote : votes) {
+				if (ranking.containsKey(vote.getBook())) {
+					int pont = ranking.get(vote.getBook());
+					ranking.put(vote.getBook(), pont + 1);
+				} else {
+					ranking.put(vote.getBook(), 1);
+				}
 			}
 		}
-		
 		for (Book book : ranking.keySet()) {
 			listPont.add(new BookRk(book, ranking.get(book)));
 		}
